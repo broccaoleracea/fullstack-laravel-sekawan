@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PublishersModel;
+use App\Models\PublishersModel as Publishers;
 use Illuminate\Http\Request;
 
 class PublishersController extends Controller
@@ -19,9 +19,13 @@ class PublishersController extends Controller
             'publisher_email' => $request->input('email'),
         ];
 
-        PublishersModel::createpublisher($data);
+        Publishers::createpublisher($data);
+        
+        return redirect()->route('admin_view_publisher')->with('success', 'Data penerbit berhasil ditambahkan!');
+    }
 
-        return redirect()->route('publisher')->with('success', 'Data penerbit berhasil ditambahkan!');
+    public function viewPublisher() {
+        return view('admin.admin_create_publisher');
     }
 
     

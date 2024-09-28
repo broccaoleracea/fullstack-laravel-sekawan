@@ -32,12 +32,16 @@ Route::controller(PagesController::class)->group(function () {
         Route::get('/', 'dashboardAdmin');
         Route::get('/dash', 'dashboardAdmin');
         Route::get('/dashboard', 'dashboardAdmin');
+        
+        Route::get('/publisher', [PagesController:: class, 'viewPublisher'])->name('publishers');
+
+        Route::prefix('/create')->group(function () {
+            Route::get('/publisher', [PublishersController::class, 'viewPublisher'])->name('create_publishers');
+            Route::post('/publisher', [PublishersController::class, 'create'])->name('action.createpublisher');
+        });
     });
     
-    Route::prefix('/create')->group(function () {
-        Route::post('/createpenerbit', [PublishersController::class, 'create'])->name('action.createpenerbit');
-    });
-
+    
     Route::prefix('/siswa')->group(function () {
     });
 });

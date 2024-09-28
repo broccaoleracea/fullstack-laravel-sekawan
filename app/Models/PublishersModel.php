@@ -18,7 +18,14 @@ class PublishersModel extends Model
         'publisher_id' => 'string'
     );
 
-    protected static function createPublisher ($data)
+    protected static function readPublishers ()
+    {
+        $data = self::all(); 
+        return $data; 
+    } 
+
+    
+    protected static function createPublishers ($data)
     {
         return self::create($data);
     }
