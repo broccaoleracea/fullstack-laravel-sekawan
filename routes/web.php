@@ -39,6 +39,13 @@ Route::controller(PagesController::class)->group(function () {
             Route::get('/publisher', [PublishersController::class, 'viewPublisher'])->name('create_publishers');
             Route::post('/publisher', [PublishersController::class, 'create'])->name('action.createpublisher');
         });
+
+        Route::prefix('/update')->group(function () {
+            Route::get('/publisher/{publisher_id}', [PagesController::class, 'update_publishers'])->name('update_publishers');
+            Route::patch('/publisher/{publisher_id}', [PublishersController::class, 'update'])->name('publishers.update');
+        });
+
+        Route::delete('/delete/publisher/{publisher_id}', [PublishersController::class, 'delete'])->name('publishers.delete');
     });
     
     

@@ -14,11 +14,15 @@ class PagesController extends Controller
     public function dashboardAdmin () {
         return view('admin.admin_dashboard', ['level' => 'admin']);
     }
-    
-    
 
     public function viewPublisher() {
         $data = Publishers::readPublishers();
         return view('admin.admin_publishers_view', ['level' => 'admin'])->with('publishers', $data);
+    }
+
+    public function update_publishers ($id) {
+        $publishers = Publishers::readPublisherById($id);
+    
+        return view('admin.admin_update_publishers', ['level' => 'admin'])->with('publishers', $publishers);
     }
 }

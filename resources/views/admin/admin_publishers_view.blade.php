@@ -24,6 +24,16 @@
                         <strong>Berhasil!</strong> {{ session('success') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+                @elseif (session('updated'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Berhasil!</strong> {{ session('updated') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @elseif (session('deleted'))
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <strong>Berhasil!</strong> {{ session('deleted') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
                 @endif
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -41,15 +51,19 @@
                             @foreach ($publishers as $publishers)    
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $publishers->publisher_nama }}</td>
-                                <td>{{ $publishers->publisher_alamat }}</td>
-                                <td>{{ $publishers->publisher_notelp }}</td>
+                                <td>{{ $publishers->publisher_name }}</td>
+                                <td>{{ $publishers->publisher_addr }}</td>
+                                <td>{{ $publishers->publisher_phone }}</td>
                                 <td>{{ $publishers->publisher_email }}</td>
                                 <td>
-                                    <a href="{{ route('update_publisher', ['publisher_id' => $publishers->publisher_id]) }}">
+                                    <a href="{{ route('update_publishers', ['publisher_id' => $publishers->publisher_id]) }}">
                                         <button class="btn btn-warning"><i class="fas fa-pencil"></i></button>
                                     </a>
-                                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                    <form action="{{ route('publishers.delete', ['publisher_id' => $publishers->publisher_id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

@@ -13,20 +13,39 @@ class PublishersController extends Controller
 
         $data = [
             'publisher_id' => $id,
-            'publisher_nama' => $request->input('nama'),
-            'publisher_alamat' => $request->input('alamat'),
-            'publisher_notelp' => $request->input('notelp'),
+            'publisher_name' => $request->input('nama'),
+            'publisher_addr' => $request->input('alamat'),
+            'publisher_phone' => $request->input('notelp'),
             'publisher_email' => $request->input('email'),
         ];
 
-        Publishers::createpublisher($data);
+        Publishers::createPublishers($data);
         
-        return redirect()->route('admin_view_publisher')->with('success', 'Data penerbit berhasil ditambahkan!');
+        return redirect()->route('publishers')->with('success', 'Data penerbit berhasil ditambahkan!');
     }
 
     public function viewPublisher() {
         return view('admin.admin_create_publisher');
     }
 
-    
+    public function update (Request $request, $id)
+    {
+        $data = [
+           'publisher_id' => $id,
+            'publisher_name' => $request->input('nama'),
+            'publisher_addr' => $request->input('alamat'),
+            'publisher_phone' => $request->input('notelp'),
+            'publisher_email' => $request->input('email'),
+        ];
+
+        Publishers::updatePublishers($id, $data);
+
+        return redirect()->route('publishers')->with('updated', 'Data penerbit berhasil diupdate!');
+    }
+
+    public function delete ($id)
+    {
+        Publishers::deletePublisher($id);
+        return redirect()->route('publishers')->with('deleted', 'Data penerbit berhasil dihapus!');
+    }
 }
