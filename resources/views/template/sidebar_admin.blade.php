@@ -7,19 +7,19 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Dashboard
                 </a>
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('books') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
                     Buku
                 </a>
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('categories') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
                     Kategori Buku
                 </a>
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('authors') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-pencil"></i></div>
                     Penulis
                 </a>
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('publishers') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-house"></i></div>
                     Penerbit
                 </a>

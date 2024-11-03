@@ -21,4 +21,37 @@ class AuthorModel extends Model
     protected $casts = array(
         'author_id' => 'string',
     );
+
+    protected static function readAuthors ()
+    {
+        $data = self::all(); 
+        return $data; 
+    } 
+
+    protected static function createAuthors($data)
+    {
+        return self::create($data);
+    }
+
+    protected static function updateAuthors ($id, $data)
+    {
+        $author = self::find($id);
+        if ($author) {
+            $author->update($data);
+            return $author;
+        }
+        return null;
+    }
+
+    protected static function readAuthorById ($id)
+    {
+        $author = self::find($id);
+
+        return $author;
+    }
+
+    protected static function deleteAuthor($id)
+    {
+        return self::destroy($id);
+    }
 }

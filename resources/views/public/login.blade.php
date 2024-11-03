@@ -4,7 +4,7 @@
     <section class="login-container">
         <div class="card shadow-lg">
             <div class="card-header">
-                <img src="{{ asset('media/book.png') }}" alt="..." class="img-logo">
+                <img src="./media/book.png" alt="..." class="img-logo">
                 <h3 class="text-center">Login - Web Perpustakaan</h3>
             </div>
             <div class="card-body">
