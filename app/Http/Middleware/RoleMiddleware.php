@@ -4,33 +4,39 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\Response;
 
 class RoleMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
-    // public function handle(Request $request, Closure $next): Response
-    // {
-    //     return $next($request);
-    // }
-
     public function handle(Request $request, Closure $next): Response
-{
-    if (!Auth::check()) {
-        return redirect()->route('login')->with('failed', 'Silahkan login terlebih dahulu');
+    {
+        Log::info('RoleMiddleware is executing');
+        Log::info('Request Path: ' . $request->path());
+
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $user = Auth::user();
+
+        if ($request->is('admin*')) {
+            Log::info('log event 2');
+            if ($user->user_level !== 'admin') {
+                // Redirect to the user dashboard or appropriate user page if not an admin
+                return redirect()->route('dashboardSiswa')->with('error', 'Unauthorized access to admin section.');
+            }
+        } else {
+            Log::info('log event 3');
+        }
+
+        // If accessing user pages, make sure they have a valid role
+        if ($request->is('user*') && $user->user_level !== 'admin' && $user->user_level !== 'anggota') {
+            abort(403, 'Unauthorized');
+        }
+
+        // Allow access if all checks pass
+        return $next($request);
     }
-
-    $user = Auth::user();
-
-    if ($user->user_level !== 'admin' && $user->user_level !== 'anggota') {
-        abort(403, 'Unauthorized');
-    }
-
-    return $next($request);
-}
 }

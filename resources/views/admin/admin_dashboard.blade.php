@@ -14,11 +14,6 @@
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Halaman Dashboard Admin Perpustakaan</li>
                     </ol>
-                    @if ($level === 'admin')
-                        <h2>Selamat datang, {{ $level }}</h2>
-                    @else
-                        <h2>Akun anda tidak memiliki izin untuk mengakses halaman ini.</h2>
-                    @endif
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">

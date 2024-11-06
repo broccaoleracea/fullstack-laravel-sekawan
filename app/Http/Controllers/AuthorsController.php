@@ -24,7 +24,7 @@ class AuthorsController extends Controller
 
         AuthorModel::createAuthors($data);
         
-        return redirect()->route('authors')->with('success', 'Data penerbit berhasil ditambahkan!');
+        return redirect()->route('authors')->with('success', 'Data penulis berhasil ditambahkan!');
     }
 
     public function viewCreateAuthor() {
