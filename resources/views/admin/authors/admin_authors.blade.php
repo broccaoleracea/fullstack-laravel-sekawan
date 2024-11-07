@@ -1,6 +1,6 @@
 @extends('template.layout')
 
-@section('title', 'Halaman Penulis')
+@section('title', 'Authors Page')
 
 @section('header')
     @include('template.navbar_admin')
@@ -12,50 +12,34 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Penulis</h1>
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Halaman Data Penulis</li>
-                </ol>
+                <h3 class="mt-4">Authors</h3>
+                <p class="">Author Data Page</p>
                 <a href="{{ route('create_authors') }}">
-                    <button class="btn btn-primary my-3">Tambah Penulis</button>
+                    <button class="btn btn-primary"><i class="fas fa-plus"></i> Add Author</button>
                 </a>
-                @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Berhasil!</strong> {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @elseif (session('updated'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Berhasil!</strong> {{ session('updated') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @elseif (session('deleted'))
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
-                    <strong>Berhasil!</strong> {{ session('deleted') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @endif
-                <div class="table-responsive">
-                    <table class="table table-bordered">
+                @include('template.session_info')
+        
+                <div class="table-responsive my-2">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="row">No</th>
-                                <th scope="row">Nama Penulis</th>
-                                <th scope="row">Deskripsi</th>
-                                <th scope="row">Aksi</th>
+                                <th scope="row">Author Name</th>
+                                <th scope="row">Description</th>
+                                <th scope="row">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($authors as $authors)    
+                            @foreach ($authors as $author)    
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $authors->author_name }}</td>
-                                <td>{{ $authors->author_description }}</td>
+                                <td>{{ $author->author_name }}</td>
+                                <td>{{ $author->author_description }}</td>
                                 <td>
-                                    <a href="{{ route('update_author', ['author_id' => $authors->author_id]) }}">
-                                        <button class="btn btn-warning"><i class="fas fa-pencil"></i></button>
+                                    <a href="{{ route('update_author', ['author_id' => $author->author_id]) }}">
+                                        <button class="btn btn-warning mb-1"><i class="fas fa-pencil"></i></button>
                                     </a>
-                                    <form action="{{ route('author.delete', ['author_id' => $authors->author_id]) }}" method="POST">
+                                    <form action="{{ route('author.delete', ['author_id' => $author->author_id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger"><i class="fas fa-trash"></i></button>

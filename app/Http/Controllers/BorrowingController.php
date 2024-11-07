@@ -147,7 +147,7 @@ class BorrowingController extends Controller
             ]);
         }
 
-        return redirect()->route('student.borrow.list')->with('success', 'Books successfully borrowed!');
+        return redirect()->route('user.borrowings.history')->with('success', 'Books successfully borrowed!');
     }
 
     public function showBookPage()

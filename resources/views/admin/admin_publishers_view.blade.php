@@ -1,6 +1,6 @@
 @extends('template.layout')
 
-@section('title', 'Halaman Penerbit')
+@section('title', 'Publishers Page')
 
 @section('header')
     @include('template.navbar_admin')
@@ -11,55 +11,37 @@
     @include('template.sidebar_admin')
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-4">
-                <h1 class="mt-4">Penerbit</h1>
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Halaman Data Penerbit</li>
-                </ol>
+            <div class="container-fluid p-4">
+                <h3 class="">Publishers</h3>
                 <a href="{{ route('create_publishers') }}">
-                    <button class="btn btn-primary my-3">Tambah Penerbit</button>
+                    <button class="btn btn-primary"><i class="fas fa-plus"></i> Add Publisher</button>
                 </a>
-                @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Berhasil!</strong> {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @elseif (session('updated'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Berhasil!</strong> {{ session('updated') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @elseif (session('deleted'))
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
-                    <strong>Berhasil!</strong> {{ session('deleted') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @endif
-                <div class="table-responsive">
-                    <table class="table table-bordered">
+                @include('template.session_info')
+                <div class="table-responsive mt-2">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="row">No</th>
-                                <th scope="row">Nama Penerbit</th>
-                                <th scope="row">Alamat Penerbit</th>
-                                <th scope="row">No Telp Penerbit</th>
-                                <th scope="row">Email Penerbit</th>
-                                <th scope="row">Aksi</th>
+                                <th scope="row">Publisher Name</th>
+                                <th scope="row">Publisher Address</th>
+                                <th scope="row">Publisher Phone</th>
+                                <th scope="row">Publisher Email</th>
+                                <th scope="row">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($publishers as $publishers)    
+                            @foreach ($publishers as $publisher)    
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $publishers->publisher_name }}</td>
-                                <td>{{ $publishers->publisher_addr }}</td>
-                                <td>{{ $publishers->publisher_phone }}</td>
-                                <td>{{ $publishers->publisher_email }}</td>
+                                <td>{{ $publisher->publisher_name }}</td>
+                                <td>{{ $publisher->publisher_addr }}</td>
+                                <td>{{ $publisher->publisher_phone }}</td>
+                                <td>{{ $publisher->publisher_email }}</td>
                                 <td>
-                                    <a href="{{ route('update_publishers', ['publisher_id' => $publishers->publisher_id]) }}">
-                                        <button class="btn btn-warning"><i class="fas fa-pencil"></i></button>
+                                    <a href="{{ route('update_publishers', ['publisher_id' => $publisher->publisher_id]) }}">
+                                        <button class="btn btn-warning mb-1"><i class="fas fa-pencil"></i></button>
                                     </a>
-                                    <form action="{{ route('publishers.delete', ['publisher_id' => $publishers->publisher_id]) }}" method="POST">
+                                    <form action="{{ route('publishers.delete', ['publisher_id' => $publisher->publisher_id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger"><i class="fas fa-trash"></i></button>

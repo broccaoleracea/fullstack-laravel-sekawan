@@ -1,6 +1,6 @@
 @extends('template.layout')
 
-@section('title', 'Halaman Kategori Buku')
+@section('title', 'Book Categories Page')
 
 @section('header')
     @include('template.navbar_admin')
@@ -11,52 +11,34 @@
     @include('template.sidebar_admin')
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-4">
-                <h1 class="mt-4">Penulis</h1>
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Halaman Data Kategori Buku</li>
-                </ol>
+            <div class="container-fluid p-4">
+                <h3 class="">Book Categories</h3> 
                 <a href="{{ route('create_category') }}">
-                    <button class="btn btn-primary my-3">Tambah Kategori</button>
+                    <button class="btn btn-primary"><i class="fas fa-plus"></i> Add Category</button>
                 </a>
-                @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Berhasil!</strong> {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @elseif (session('updated'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Berhasil!</strong> {{ session('updated') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @elseif (session('deleted'))
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
-                    <strong>Berhasil!</strong> {{ session('deleted') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @endif
-                <div class="table-responsive">
-                    <table class="table table-bordered">
+                @include('template.session_info')
+                <div class="table-responsive my-2">
+                    <table class="table table-striped my-2">
                         <thead>
                             <tr>
                                 <th scope="row">No</th>
-                                <th scope="row">Nama Kategori</th>
-                                <th scope="row">Aksi</th>
+                                <th scope="row">Category Name</th>
+                                <th scope="row">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $categories)    
+                            @foreach ($categories as $category)    
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $categories->category_name }}</td>
+                                <td>{{ $category->category_name }}</td>
                                 <td>
-                                    <a href="{{ route('update_category', ['category_id' => $categories->category_id]) }}">
-                                        <button class="btn btn-warning"><i class="fas fa-pencil"></i></button>
+                                    <a href="{{ route('update_category', ['category_id' => $category->category_id]) }}">
+                                        <button class="btn btn-warning btn-sm mr-1 mb-1"><i class="fas fa-pencil"></i></button>
                                     </a>
-                                    <form action="{{ route('category.delete', ['category_id' => $categories->category_id]) }}" method="POST">
+                                    <form action="{{ route('category.delete', ['category_id' => $category->category_id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                        <button class="btn btn-danger mr-1 mb-1 btn-sm "><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -66,7 +48,7 @@
                 </div>
             </div>
         </main>
-        {{-- @include('template.footer') --}}
+        @include('template.footer')
     </div>
 </div>
 @endsection

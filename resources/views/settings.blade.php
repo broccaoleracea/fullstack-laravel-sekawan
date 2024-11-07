@@ -36,9 +36,10 @@
                 @endif
                 <div class="d-flex items-center gap-4">
                     @if ($user->user_pict_url === '' ||$user->user_pict_url === null )
-                        <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg" class="rounded-circle img-profile img-thumbnail">
+                        <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg" class="rounded-circle img-profile img-thumbnail" style="width: 200px; height: 200px; object-fit: cover;">
                     @else
-                        <img src="{{ asset('storage/profile_pictures/'.basename($user->user_pict_url)) }}" alt="..." class="rounded-circle img-profile img-thumbnail">
+                    <img src="{{ asset('storage/profile_pictures/'.basename($user->user_pict_url)) }}" alt="..." class="rounded-circle img-profile img-thumbnail" style="width: 200px; height: 200px; object-fit: cover;">
+
                     @endif
                     
                     <form action="{{ route('action.upload_profile', ['id' => $user->user_id]) }}" method="POST" enctype="multipart/form-data">
@@ -53,7 +54,8 @@
                         </div>
                     </form>
                 </div>
-                <form action="" class="my-4 row gap-3">
+                
+                {{-- <form action="" class="my-4 row gap-3">
                     <div class="form-group col-12 col-md-4">
                         <label for="nama" class="form-label">Nama Lengkap</label>
                         <input type="text" class="form-control" name="nama" id="nama">
@@ -81,7 +83,7 @@
                     <div class="form-group col-12 col-md-4">
                         <button class="btn btn-primary">Update</button>
                     </div>
-                </form>
+                </form> --}}
             </div>
         </main>
         @include('template.footer')

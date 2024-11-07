@@ -9,42 +9,43 @@
                 </a>
                 <a class="nav-link" href="{{ route('books') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
-                    Buku
+                    Books
                 </a>
                 <a class="nav-link" href="{{ route('categories') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
-                    Kategori Buku
+                    <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
+                    Book Categories
                 </a>
                 <a class="nav-link" href="{{ route('authors') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-pencil"></i></div>
-                    Penulis
+                    <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
+                    Authors
                 </a>
                 <a class="nav-link" href="{{ route('publishers') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-house"></i></div>
-                    Penerbit
+                    <div class="sb-nav-link-icon"><i class="fas fa-building"></i></div>
+                    Publishers
                 </a>
                 <a class="nav-link" href="{{ route('admin.borrowings.index')}}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-hand"></i></div>
-                    Peminjaman
+                    <div class="sb-nav-link-icon"><i class="fas fa-hand-holding"></i></div>
+                    Borrowings
                 </a>
                 <a class="nav-link" href="{{ route('settings') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-gear"></i></div>
-                    Pengaturan
+                    <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
+                    Settings
                 </a>
                 <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                     @csrf
-                    <button type="submit" class="nav-link"><div class="sb-nav-link-icon"><i class="fas fa-right-from-bracket"></i></div>Logout</button>
+                    <button type="submit" class="nav-link">
+                        <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>Logout
+                    </button>
                 </form>
             </div>
         </div>
-        <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-                @if(Auth::check())
-                    <p>{{ Auth::user()->user_nama }}</p>
-                @endif
-                @if (Auth::check())
-    <p>User Level: {{ Auth::user()->user_level }}</p>
-@endif
+        <div class="sb-sidenav-footer"> 
+            @if(Auth::check())
+                <strong>{{ Auth::user()->user_nama }}</strong>
+                <small><span>(@</span>{{ Auth::user()->user_username }}<span>)</span></small>
+                <br>
+                {{ Auth::user()->user_level === 'admin' ? "Administrator" : "Student" }}
+            @endif
         </div>
     </nav>
 </div>

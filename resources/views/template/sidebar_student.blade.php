@@ -8,29 +8,32 @@
                     Dashboard
                 </a>
                 <a class="nav-link" href="{{ route('user.borrow') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
-                    Buku
+                    <div class="sb-nav-link-icon"><i class="fas fa-book-reader"></i></div>
+                    Books
                 </a>
                 <a class="nav-link" href="{{ route('user.borrowings.history') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-hand"></i></div>
-                    Peminjaman
+                    <div class="sb-nav-link-icon"><i class="fas fa-history"></i></div>
+                    Borrowing History
                 </a>
                 <a class="nav-link" href="{{ route('settings') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-gear"></i></div>
-                    Pengaturan
+                    <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
+                    Settings
                 </a>
                 <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                     @csrf
-                    <button type="submit" class="nav-link"><div class="sb-nav-link-icon"><i class="fas fa-right-from-bracket"></i></div>Logout</button>
+                    <button type="submit" class="nav-link">
+                        <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>Logout
+                    </button>
                 </form>
             </div>
         </div>
         <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-            @if(Auth::check())
-                <p>{{ Auth::user()->user_nama }}</p>
-                <p>User Level: {{ Auth::user()->user_level }}</p>
-            @endif            
+             @if(Auth::check())
+                <strong>{{ Auth::user()->user_nama }}</strong>
+                <small><span>(@</span>{{ Auth::user()->user_username }}<span>)</span></small>
+                <br>
+                {{ Auth::user()->user_level === 'admin' ? "Administrator" : "Student" }}
+            @endif
         </div>
     </nav>
 </div>

@@ -1,6 +1,6 @@
 @extends('template.layout')
 
-@section('title', 'Halaman Buku')
+@section('title', 'Books Page')
 
 @section('header')
     @include('template.navbar_admin')
@@ -13,9 +13,9 @@
         <main>
             <div class="container-fluid p-4">
                 <h3 class="">Books List</h3>
-                    <p class="">Halaman Data Buku</p>
+                {{-- <p class="">Book Data Page</p> --}}
                 <a href="{{ route('create_book') }}">
-                    <button class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Buku</button>
+                    <button class="btn btn-primary"><i class="fas fa-plus"></i> Add Book</button>
                 </a>
                 @include('template.session_info')
                 <div class="table-responsive">
@@ -23,38 +23,38 @@
                         <thead>
                             <tr>
                                 <th scope="row">No</th>
-                                <th scope="row">Nama Buku</th>
-                                <th scope="row">Kategori</th>
-                                <th scope="row">Penerbit</th>
-                                <th scope="row">Penulis</th>
+                                <th scope="row">Book Name</th>
+                                <th scope="row">Category</th>
+                                <th scope="row">Publisher</th>
+                                <th scope="row">Author</th>
                                 <th scope="row">ISBN</th>
-                                <th scope="row">Deskripsi</th>
-                                <th scope="row">Aksi</th>
+                                <th scope="row">Description</th>
+                                <th scope="row">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($books as $books)    
+                            @foreach ($books as $book)    
                             <tr>
-                            <td>{{ $loop->iteration }}</td>
-        <td>{{ $books->book_name }}</td>
-        <td>{{ $books->category->category_name ?? 'N/A' }}</td>
-        <td>{{ $books->publisher->publisher_name ?? 'N/A' }}</td>
-        <td>{{ $books->author->author_name ?? 'N/A' }}</td>
-        <td>{{ $books->book_isbn }}</td>
-        <td>{{ $books ->book_desc }}</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $book->book_name }}</td>
+                                <td>{{ $book->category->category_name ?? 'N/A' }}</td>
+                                <td>{{ $book->publisher->publisher_name ?? 'N/A' }}</td>
+                                <td>{{ $book->author->author_name ?? 'N/A' }}</td>
+                                <td>{{ $book->book_isbn }}</td>
+                                <td>{{ $book->book_desc }}</td>
                                 <td>
-                                    @if($books->book_img != null)
-                                    <a href="{{ asset('storage/book_pictures/'.basename($books->book_img)) }}">
-                                        <button class="btn btn-success btn-sm"><i class="fas fa-paperclip"></i></button>
-                                    </a>
+                                    @if($book->book_img != null)
+                                        <a href="{{ asset('storage/book_pictures/'.basename($book->book_img)) }}">
+                                            <button class="btn btn-success btn-sm mr-1 mb-1"><i class="fas fa-paperclip"></i></button>
+                                        </a>
                                     @endif
-                                    <a href="{{ route('update_book', ['book_id' => $books->book_id]) }}">
-                                        <button class="btn btn-warning btn-sm"><i class="fas fa-pencil"></i></button>
+                                    <a href="{{ route('update_book', ['book_id' => $book->book_id]) }}">
+                                        <button class="btn btn-warning btn-sm mr-1 mb-1 "><i class="fas fa-pencil"></i></button>
                                     </a>
-                                    <form action="{{ route('book.delete', ['book_id' => $books->book_id]) }}" method="POST">
+                                    <form action="{{ route('book.delete', ['book_id' => $book->book_id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                        <button class="btn btn-danger btn-sm mr-1 mb-1"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -64,7 +64,7 @@
                 </div>
             </div>
         </main>
-        {{-- @include('template.footer') --}}
+        @include('template.footer')
     </div>
 </div>
 @endsection

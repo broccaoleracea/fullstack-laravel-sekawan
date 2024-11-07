@@ -11,11 +11,8 @@
     @include('template.sidebar_admin')
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid px-4">
-                <h1 class="mt-4">Buku</h1>
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Halaman Create Data Buku</li>
-                </ol>
+            <div class="container-fluid p-4">
+                <h2 class="">Tambah Buku Baru</h2>
                 <form action="{{ route('action.createbook') }}" class="row my-4 gap-3" method="post"  enctype="multipart/form-data">
                     @csrf
                     <div class="form-group col-12 col-md-6 col-lg-4">
