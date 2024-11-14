@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AuthorsController extends Controller
 {
     public function viewAuthors() {
-        $data = AuthorModel::readAuthors();
+        $data = AuthorModel::Paginate(10);
         return view('admin.authors.admin_authors', ['level' => 'admin'])->with('authors', $data);
     }
 

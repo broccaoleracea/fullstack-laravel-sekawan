@@ -15,7 +15,7 @@ class BorrowingController extends Controller
     // 1. Index: Show all borrowing records
     public function index()
     {
-        $borrowings = BorrowingModel::with('user', 'books')->get(); // Eager load user and books
+        $borrowings = BorrowingModel::with('user', 'books')->paginate(10); // Eager load user and books
         return view('admin.borrowings.index', compact('borrowings'));
     }
 

@@ -13,7 +13,7 @@ class BooksController extends Controller
 {
     public function viewBooks()
     {
-        $data = BooksModel::with(['publisher', 'category', 'author'])->get();
+        $data = BooksModel::with(['publisher', 'category', 'author'])->paginate(10);
         return view('admin.books.admin_books', ['level' => 'admin'])->with('books', $data);
     }
 

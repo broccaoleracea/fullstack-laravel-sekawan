@@ -11,6 +11,17 @@ class UsersController extends Controller
 {
     public function register(Request $request)
     {
+        // Define validation rules
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'username' => 'required|string|unique:users,user_username|max:255',
+            'email' => 'required|email|unique:users,user_email|max:255',
+            'notelp' => 'required|numeric|min:10', // Ensure it's a valid phone number
+            'password' => 'required|string|min:8|confirmed', // This will ensure the password and password_confirmation match
+        ]);
+
+        // If validation passes, proceed with the registration logic
         $id = mt_rand(1000000000000000, 9999999999999999);
 
         $data = [
@@ -28,9 +39,11 @@ class UsersController extends Controller
         if ($user) {
             return redirect()->route('login')->with('success', 'Pendaftaran akun berhasil!');
         } else {
-            return back()->withInput();
+            return back()->withInput()->with('error', 'Terjadi kesalahan saat mendaftar.');
         }
     }
+
+
 
     public function login(Request $request)
     {

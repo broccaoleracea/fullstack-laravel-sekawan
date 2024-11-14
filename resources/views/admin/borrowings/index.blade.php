@@ -34,11 +34,14 @@
                                         @foreach($borrowing->borrowingDetails as $detail)
                                             <li>
                                                 {{ $detail->book->book_name }}
+
+                                                @if(count($borrowing->borrowingDetails) > 1)        
                                                 <form action="{{ route('admin.borrowing.removeBook', ['borrowing_id' => $borrowing->borrowing_id, 'detail_uuid' => $detail->detail_id]) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-danger btn-sm"><i class="fas fa-minus"></i></button>
                                                 </form>
+                                                @endif
                                             </li>
                                         @endforeach
                                     </ul>
@@ -66,6 +69,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $borrowings->links('vendor.pagination.bootstrap-5') }}
             </div>
         </main>
         @include('template.footer')

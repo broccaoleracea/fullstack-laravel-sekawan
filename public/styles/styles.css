@@ -4,6 +4,24 @@
     display: block;
 }
 
+.multi-line-truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical; /* Required for multi-line clamping */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* Ensure text wraps */
+    width: 100%; /* Ensure it takes the full width of the card-body */
+}
+
+/* Optional: Adjust card body height or space if needed */
+.card-body-book {
+    height: 150px; /* Adjust height if needed to control card layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 @media only screen and (max-width: 576px) {
     .login-container {
         padding: 50px 30px;

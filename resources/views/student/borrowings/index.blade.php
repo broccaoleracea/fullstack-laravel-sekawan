@@ -30,8 +30,8 @@
                                     <ul>
                                         @foreach($borrowing->borrowingDetails as $detail)
                                             <li>
-                                                <span>{{ $detail->book->book_name }}</span>
-                                                {{$detail->detail_qty}}
+                                                <span>{{ $detail->book->book_name }}</span><span class="font-weight-light text-gray-600">{{'('}}{{$detail->detail_qty}}{{')'}}</span>
+                                                
                                             </li>
                                         @endforeach
                                     </ul>

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CategoriesController extends Controller
 {
     public function viewCategories() {
-        $data = CategoriesModel::readCategories();
+        $data = CategoriesModel::Paginate(10);
         return view('admin.categories.admin_category', ['level' => 'admin'])->with('categories', $data);
     }
 

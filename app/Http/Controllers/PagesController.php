@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PublishersModel as Publishers;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class PagesController extends Controller
 {
@@ -34,7 +36,7 @@ class PagesController extends Controller
     }
     public function viewPublisher()
     {
-        $data = Publishers::readPublishers();
+        $data = Publishers::paginate(10);
         return view('admin.admin_publishers_view', ['level' => 'admin'])->with('publishers', $data);
     }
 

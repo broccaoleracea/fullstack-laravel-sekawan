@@ -46,6 +46,8 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $categories
+                ->links('vendor.pagination.bootstrap-5') }}
             </div>
         </main>
         @include('template.footer')

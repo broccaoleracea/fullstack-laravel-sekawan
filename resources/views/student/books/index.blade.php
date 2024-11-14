@@ -15,22 +15,21 @@
                         @csrf
                         <div class="row">
                             @foreach ($books as $book)
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                         <label for="book_ids[]">
-                                        <div class="card mb-3">
-                                            <img src="{{ asset('storage/book_pictures/' . basename($book->book_img)) }}"
-                                                class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <input type="checkbox" name="book_ids[]" id="book_ids[]"
-                                                    value="{{ $book->book_id }}">
-                                                <h5>{{ $book->book_name }}</h5>
-
-                                                <!-- Modal Trigger Button -->
-                                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#bookModal{{ $book->book_id }}">
-                                                    <i class="fas fa-list"></i> Detail
-                                                </button>
+                                            <div class="card mb-3">
+                                                <img src="{{ asset('storage/book_pictures/' . basename($book->book_img)) }}" class="card-img-top" alt="...">
+                                                <div class="card-body card-body-books">
+                                                    <input type="checkbox" name="book_ids[]" id="book_ids[]"
+                                                           value="{{ $book->book_id }}">
+                                                    <h5 class="text-truncate multi-line-truncate">{{ $book->book_name }}</h5>
+                                    
+                                                    <!-- Modal Trigger Button -->
+                                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#bookModal{{ $book->book_id }}">
+                                                        <i class="fas fa-list"></i> Detail
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
                                     </label>
                                     </div>
 

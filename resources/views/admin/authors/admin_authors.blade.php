@@ -37,12 +37,12 @@
                                 <td>{{ $author->author_description }}</td>
                                 <td>
                                     <a href="{{ route('update_author', ['author_id' => $author->author_id]) }}">
-                                        <button class="btn btn-warning mb-1"><i class="fas fa-pencil"></i></button>
+                                        <button class="btn btn-sm btn-warning mb-1"><i class="fas fa-pencil"></i></button>
                                     </a>
                                     <form action="{{ route('author.delete', ['author_id' => $author->author_id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -50,6 +50,7 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $authors->links('vendor.pagination.bootstrap-5') }}
             </div>
         </main>
         {{-- @include('template.footer') --}}

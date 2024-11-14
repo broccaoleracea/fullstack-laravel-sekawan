@@ -46,6 +46,7 @@
                     </tbody>
                 </table>
             </div>
+            {{ $books->links('vendor.pagination.bootstrap-5') }}
         </main>
         @include('template.footer')
     </div>
